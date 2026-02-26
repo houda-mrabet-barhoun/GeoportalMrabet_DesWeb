@@ -1,5 +1,6 @@
 import sys
 
+
 from buildings.insert import insert as insert_building
 from buildings.select import select as select_building
 from buildings.update import update as update_building
