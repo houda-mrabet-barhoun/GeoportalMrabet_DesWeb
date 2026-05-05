@@ -1,0 +1,43 @@
+CLIENTES DJANGO
+INSERT
+python manage.py runscript mainDjango --script-args clientes insert '{"nombre":"Cliente Django","direccion":"Calle test","telefono":"600000003","tipo_cliente":"normal","barrio":"Centro","geom":"POINT(725000 4370000)"}'
+
+SELECT TUPLAS
+python manage.py runscript mainDjango --script-args clientes selectAsTuples '{"id":1}'
+
+SELECT DICTS
+python manage.py runscript mainDjango --script-args clientes selectAsDicts '{"id":1}'
+
+UPDATE
+python manage.py runscript mainDjango --script-args clientes update '{"id":1,"nombre":"Cliente Django update","direccion":"Calle nueva","telefono":"600000004","tipo_cliente":"vip","barrio":"Centro","geom":"POINT(725200 4370200)"}'
+
+DELETE
+python manage.py runscript mainDjango --script-args clientes delete '{"id":1}'
+________________________________________
+BARRIOS DJANGO
+INSERT
+python manage.py runscript mainDjango --script-args barrios insert '{"nombre":"Barrio Django","codigo":"BD01","distrito":"Centro","geom":"POLYGON((724000 4369000,726000 4369000,726000 4371000,724000 4371000,724000 4369000))","area":4000000,"numero_clientes":0}'
+
+SELECT
+python manage.py runscript mainDjango --script-args barrios selectAsDicts '{"id":1}'
+
+UPDATE
+python manage.py runscript mainDjango --script-args barrios update '{"id":1,"nombre":"Barrio Django update","codigo":"BD02","distrito":"Benimaclet","geom":"POLYGON((724200 4369200,726200 4369200,726200 4371200,724200 4371200,724200 4369200))","area":4200000,"numero_clientes":1}'
+
+DELETE
+python manage.py runscript mainDjango --script-args barrios delete '{"id":1}'
+________________________________________
+RUTAS DJANGO
+INSERT
+python manage.py runscript mainDjango --script-args rutas insert '{"geom":"LINESTRING(724500 4369500,725500 4370500)","distancia":1400,"tiempo":11,"estado":"activa","barrio_destino":"Centro","numero_paradas":3}'
+
+SELECT
+python manage.py runscript mainDjango --script-args rutas selectAsDicts '{"id":1}'
+
+UPDATE
+python manage.py runscript mainDjango --script-args rutas update '{"id":1,"geom":"LINESTRING(724700 4369700,725700 4370700)","distancia":1700,"tiempo":15,"estado":"activa","barrio_destino":"Centro","numero_paradas":5}'
+
+DELETE
+python manage.py runscript mainDjango --script-args rutas delete '{"id":1}'
+
+

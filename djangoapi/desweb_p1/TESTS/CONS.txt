@@ -1,0 +1,46 @@
+CLIENTES
+INSERT
+python mainOOP.py clientes insert '{"nombre":"Cliente examen","direccion":"Calle A","telefono":"600000001","tipo_cliente":"normal","barrio":"Centro","geom":"POINT(725000 4370000)"}'
+SELECT TUPLAS
+python mainOOP.py clientes selectAsTuples '{"id":1}'
+
+SELECT DICCIONARIOS
+python mainOOP.py clientes selectAsDicts '{"id":1}'
+
+UPDATE
+python mainOOP.py clientes update '{"id":1,"nombre":"Cliente actualizado","direccion":"Calle B","telefono":"600000002","tipo_cliente":"premium","barrio":"Centro","geom":"POINT(725100 4370100)"}'
+
+DELETE
+python mainOOP.py clientes delete '{"id":1}'
+________________________________________
+BARRIOS
+INSERT
+python mainOOP.py barrios insert '{"nombre":"Barrio examen","codigo":"B001","distrito":"Centro","geom":"POLYGON((724000 4369000,726000 4369000,726000 4371000,724000 4371000,724000 4369000))","area":4000000,"numero_clientes":0}'
+
+SELECT TUPLAS
+python mainOOP.py barrios selectAsTuples '{"id":1}'
+
+SELECT DICTS
+python mainOOP.py barrios selectAsDicts '{"id":1}'
+
+UPDATE
+python mainOOP.py barrios update '{"id":1,"nombre":"Barrio actualizado","codigo":"B002","distrito":"Benimaclet","geom":"POLYGON((724100 4369100,726100 4369100,726100 4371100,724100 4371100,724100 4369100))","area":4100000,"numero_clientes":2}'
+
+DELETE
+python mainOOP.py barrios delete '{"id":1}'
+________________________________________
+RUTAS
+INSERT
+python mainOOP.py rutas insert '{"geom":"LINESTRING(724500 4369500,725500 4370500)","distancia":1500,"tiempo":12,"estado":"activa","barrio_destino":"Centro","numero_paradas":3}'
+
+SELECT TUPLAS
+python mainOOP.py rutas selectAsTuples '{"id":1}'
+
+SELECT DICTS
+python mainOOP.py rutas selectAsDicts '{"id":1}'
+
+UPDATE
+python mainOOP.py rutas update '{"id":1,"geom":"LINESTRING(724600 4369600,725600 4370600)","distancia":1600,"tiempo":14,"estado":"activa","barrio_destino":"Centro","numero_paradas":4}'
+
+DELETE
+python mainOOP.py rutas delete '{"id":1}'
