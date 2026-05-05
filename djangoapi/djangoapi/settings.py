@@ -63,24 +63,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    #required by geodjango
+
+    # required by geodjango
     'django.contrib.gis',
-    #para el CORS
+
+    # para el CORS
     'corsheaders',
     'rest_framework',
     'rest_framework_gis',
-    #https://jazzband.github.io/django-rest-knox/
     'knox',
     'django_filters',
-    #'drf_yasg',
-    #add all your django apps here
     'drf_spectacular',
-    #'guardian',    
+
+    # apps del proyecto
     'core',
     'codelist',
     'buildings',
+    'buildings2',
     'flowers',
-    'accidentes'
+    'accidentes',
+    'geoportal_p1',
 ]
 
 MIDDLEWARE = [
