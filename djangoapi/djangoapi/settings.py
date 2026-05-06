@@ -79,7 +79,6 @@ INSTALLED_APPS = [
     'core',
     'codelist',
     'buildings',
-    'buildings2',
     'flowers',
     'accidentes',
     'geoportal_p1',

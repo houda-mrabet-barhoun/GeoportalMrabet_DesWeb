@@ -41,4 +41,5 @@ urlpatterns = [
     path('buildings/', include('buildings.urls')),
     path('flowers/', include('flowers.urls')),
     path('accidentes/', include('accidentes.urls')),
+    path("geoportal_p1/", include("geoportal_p1.urls")),
 ]
