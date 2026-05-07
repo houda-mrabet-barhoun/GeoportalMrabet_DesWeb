@@ -1,0 +1,79 @@
+<div class="rutas-container">
+  <h2>Rutas form</h2>
+
+  <form [formGroup]="rutasForm">
+
+    <div>
+      <label for="id">id</label>
+      <input id="id" type="number" formControlName="id">
+    </div>
+
+    <div>
+      <label for="distancia">distancia</label>
+      <input id="distancia" type="number" formControlName="distancia">
+    </div>
+
+    <div>
+      <label for="tiempo">tiempo</label>
+      <input id="tiempo" type="number" formControlName="tiempo">
+    </div>
+
+    <div>
+      <label for="estado">estado</label>
+      <input id="estado" type="text" formControlName="estado">
+    </div>
+
+    <div>
+      <label for="barrio_destino">barrio_destino</label>
+      <input id="barrio_destino" type="text" formControlName="barrio_destino">
+    </div>
+
+    <div>
+      <label for="numero_paradas">numero_paradas</label>
+      <input id="numero_paradas" type="number" formControlName="numero_paradas">
+    </div>
+
+    <div>
+      <label for="geom">geom</label>
+      <textarea id="geom" formControlName="geom"></textarea>
+    </div>
+
+    <div class="buttons">
+      <button type="button" (click)="insert()">Insert</button>
+      <button type="button" (click)="selectone()">Select one</button>
+      <button type="button" (click)="selectall()">Select all</button>
+      <button type="button" (click)="update()">Update</button>
+      <button type="button" (click)="delete()">Delete</button>
+      <button type="button" (click)="clean()">Clean</button>
+    </div>
+
+  </form>
+
+  <p class="message">{{ message }}</p>
+
+  <table *ngIf="rutas.length > 0">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>distancia</th>
+        <th>tiempo</th>
+        <th>estado</th>
+        <th>barrio_destino</th>
+        <th>numero_paradas</th>
+        <th>geom</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let ruta of rutas">
+        <td>{{ ruta.id }}</td>
+        <td>{{ ruta.distancia }}</td>
+        <td>{{ ruta.tiempo }}</td>
+        <td>{{ ruta.estado }}</td>
+        <td>{{ ruta.barrio_destino }}</td>
+        <td>{{ ruta.numero_paradas }}</td>
+        <td>{{ ruta.geom }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
