@@ -1,0 +1,4 @@
+me queda:
+- el error al arrancar:
+WARN[0000] The "GEOMATICAUPV_DOCKER_DJANGO_API_FORWARDED_PORT" variable is not set. Defaulting to a blank string.
+-las static-files:
