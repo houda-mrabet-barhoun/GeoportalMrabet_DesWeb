@@ -1,0 +1,79 @@
+<div class="barrios-container">
+  <h2>Barrios form</h2>
+
+  <form [formGroup]="barriosForm">
+
+    <div>
+      <label for="id">id</label>
+      <input id="id" type="number" formControlName="id">
+    </div>
+
+    <div>
+      <label for="nombre">nombre</label>
+      <input id="nombre" type="text" formControlName="nombre">
+    </div>
+
+    <div>
+      <label for="codigo">codigo</label>
+      <input id="codigo" type="text" formControlName="codigo">
+    </div>
+
+    <div>
+      <label for="distrito">distrito</label>
+      <input id="distrito" type="text" formControlName="distrito">
+    </div>
+
+    <div>
+      <label for="area">area</label>
+      <input id="area" type="number" formControlName="area">
+    </div>
+
+    <div>
+      <label for="numero_clientes">numero_clientes</label>
+      <input id="numero_clientes" type="number" formControlName="numero_clientes">
+    </div>
+
+    <div>
+      <label for="geom">geom</label>
+      <textarea id="geom" formControlName="geom"></textarea>
+    </div>
+
+    <div class="buttons">
+      <button type="button" (click)="insert()">Insert</button>
+      <button type="button" (click)="selectone()">Select one</button>
+      <button type="button" (click)="selectall()">Select all</button>
+      <button type="button" (click)="update()">Update</button>
+      <button type="button" (click)="delete()">Delete</button>
+      <button type="button" (click)="clean()">Clean</button>
+    </div>
+
+  </form>
+
+  <p class="message">{{ message }}</p>
+
+  <table *ngIf="barrios.length > 0">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>nombre</th>
+        <th>codigo</th>
+        <th>distrito</th>
+        <th>area</th>
+        <th>numero_clientes</th>
+        <th>geom</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let barrio of barrios">
+        <td>{{ barrio.id }}</td>
+        <td>{{ barrio.nombre }}</td>
+        <td>{{ barrio.codigo }}</td>
+        <td>{{ barrio.distrito }}</td>
+        <td>{{ barrio.area }}</td>
+        <td>{{ barrio.numero_clientes }}</td>
+        <td>{{ barrio.geom }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
