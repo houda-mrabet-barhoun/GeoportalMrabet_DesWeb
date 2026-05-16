@@ -43,6 +43,109 @@ def model_to_clean_dict(obj):
 
 
 # =========================
+# GEOMETRY VALIDATIONS
+# =========================
+
+def validate_cliente_geometry(geom):
+    if geom.geom_type != "Point":
+        return {
+            "ok": False,
+            "message": "Cliente geometry must be POINT",
+            "data": []
+        }
+
+    if not geom.valid:
+        return {
+            "ok": False,
+            "message": "Cliente geometry is not valid",
+            "data": []
+        }
+
+    barrios = Barrio.objects.filter(geom__contains=geom)
+
+    if not barrios.exists():
+        return {
+            "ok": False,
+            "message": "Cliente must be inside a barrio polygon",
+            "data": []
+        }
+
+    return {
+        "ok": True,
+        "message": "Cliente geometry is valid",
+        "data": []
+    }
+
+
+def validate_barrio_geometry(geom, id=None):
+    if geom.geom_type != "Polygon":
+        return {
+            "ok": False,
+            "message": "Barrio geometry must be POLYGON",
+            "data": []
+        }
+
+    if not geom.valid:
+        return {
+            "ok": False,
+            "message": "Barrio geometry is not valid",
+            "data": []
+        }
+
+    barrios = Barrio.objects.filter(geom__intersects=geom)
+
+    if id is not None:
+        barrios = barrios.exclude(id=id)
+
+    if barrios.exists():
+        return {
+            "ok": False,
+            "message": "Barrio polygon intersects another barrio polygon",
+            "data": []
+        }
+
+    return {
+        "ok": True,
+        "message": "Barrio geometry is valid",
+        "data": []
+    }
+
+
+def validate_ruta_geometry(geom, id=None):
+    if geom.geom_type != "LineString":
+        return {
+            "ok": False,
+            "message": "Ruta geometry must be LINESTRING",
+            "data": []
+        }
+
+    if not geom.valid:
+        return {
+            "ok": False,
+            "message": "Ruta geometry is not valid",
+            "data": []
+        }
+
+    rutas = Ruta.objects.filter(geom__intersects=geom)
+
+    if id is not None:
+        rutas = rutas.exclude(id=id)
+
+    if rutas.exists():
+        return {
+            "ok": False,
+            "message": "Ruta linestring intersects another ruta linestring",
+            "data": []
+        }
+
+    return {
+        "ok": True,
+        "message": "Ruta geometry is valid",
+        "data": []
+    }
+
+
+# =========================
 # CLIENTES
 # =========================
 
@@ -84,6 +187,11 @@ class ClientesView(BaseDjangoView):
 
         try:
             geom = GEOSGeometry(d["geom"], srid=25830)
+
+            validation = validate_cliente_geometry(geom)
+
+            if not validation["ok"]:
+                return JsonResponse(validation)
 
             cliente = Cliente(
                 nombre=d["nombre"],
@@ -131,7 +239,14 @@ class ClientesView(BaseDjangoView):
             cliente.barrio = d["barrio"]
 
             if "geom" in d and d["geom"] != "":
-                cliente.geom = GEOSGeometry(d["geom"], srid=25830)
+                geom = GEOSGeometry(d["geom"], srid=25830)
+
+                validation = validate_cliente_geometry(geom)
+
+                if not validation["ok"]:
+                    return JsonResponse(validation)
+
+                cliente.geom = geom
 
             cliente.save()
 
@@ -210,6 +325,11 @@ class BarriosView(BaseDjangoView):
         try:
             geom = GEOSGeometry(d["geom"], srid=25830)
 
+            validation = validate_barrio_geometry(geom)
+
+            if not validation["ok"]:
+                return JsonResponse(validation)
+
             barrio = Barrio(
                 nombre=d["nombre"],
                 codigo=d["codigo"],
@@ -256,7 +376,14 @@ class BarriosView(BaseDjangoView):
             barrio.numero_clientes = int(d["numero_clientes"])
 
             if "geom" in d and d["geom"] != "":
-                barrio.geom = GEOSGeometry(d["geom"], srid=25830)
+                geom = GEOSGeometry(d["geom"], srid=25830)
+
+                validation = validate_barrio_geometry(geom, id)
+
+                if not validation["ok"]:
+                    return JsonResponse(validation)
+
+                barrio.geom = geom
 
             barrio.save()
 
@@ -335,6 +462,11 @@ class RutasView(BaseDjangoView):
         try:
             geom = GEOSGeometry(d["geom"], srid=25830)
 
+            validation = validate_ruta_geometry(geom)
+
+            if not validation["ok"]:
+                return JsonResponse(validation)
+
             ruta = Ruta(
                 distancia=float(d["distancia"]),
                 tiempo=int(d["tiempo"]),
@@ -381,7 +513,14 @@ class RutasView(BaseDjangoView):
             ruta.numero_paradas = int(d["numero_paradas"])
 
             if "geom" in d and d["geom"] != "":
-                ruta.geom = GEOSGeometry(d["geom"], srid=25830)
+                geom = GEOSGeometry(d["geom"], srid=25830)
+
+                validation = validate_ruta_geometry(geom, id)
+
+                if not validation["ok"]:
+                    return JsonResponse(validation)
+
+                ruta.geom = geom
 
             ruta.save()
 
