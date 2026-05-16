@@ -1,40 +1,44 @@
 <div class="clientes-container">
-  <h2>Clientes form</h2>
+  <h2>Clientes Form</h2>
+
+  <p class="form-description">
+    Fill in the following client data to insert, search, update or delete records.
+  </p>
 
   <form [formGroup]="clientesForm">
 
     <div>
-      <label for="id">id</label>
+      <label for="id">ID</label>
       <input id="id" type="number" formControlName="id">
     </div>
 
     <div>
-      <label for="nombre">nombre</label>
+      <label for="nombre">Nombre</label>
       <input id="nombre" type="text" formControlName="nombre">
     </div>
 
     <div>
-      <label for="direccion">direccion</label>
+      <label for="direccion">Dirección</label>
       <input id="direccion" type="text" formControlName="direccion">
     </div>
 
     <div>
-      <label for="telefono">telefono</label>
+      <label for="telefono">Teléfono</label>
       <input id="telefono" type="text" formControlName="telefono">
     </div>
 
     <div>
-      <label for="tipo_cliente">tipo_cliente</label>
+      <label for="tipo_cliente">Tipo de cliente</label>
       <input id="tipo_cliente" type="text" formControlName="tipo_cliente">
     </div>
 
     <div>
-      <label for="barrio">barrio</label>
+      <label for="barrio">Barrio</label>
       <input id="barrio" type="text" formControlName="barrio">
     </div>
 
     <div>
-      <label for="geom">geom</label>
+      <label for="geom">Geometría</label>
       <textarea id="geom" formControlName="geom"></textarea>
     </div>
 
@@ -54,13 +58,13 @@
   <table *ngIf="clientes.length > 0">
     <thead>
       <tr>
-        <th>id</th>
-        <th>nombre</th>
-        <th>direccion</th>
-        <th>telefono</th>
-        <th>tipo_cliente</th>
-        <th>barrio</th>
-        <th>geom</th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Tipo de cliente</th>
+        <th>Barrio</th>
+        <th>Geometría</th>
       </tr>
     </thead>
 
